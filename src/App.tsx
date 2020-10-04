@@ -55,7 +55,7 @@ export default function App() {
 
         <div className="buttons">
           {!isRunning && <button onClick={startTimer}>Start</button>}
-          {isRunning && <button onClick={stopTimer}>Stop</button>}
+          {isRunning && <button onClick={stopTimer}>Pause</button>}
           <button onClick={resetTimer}>Reset</button>
         </div>
       </div>
