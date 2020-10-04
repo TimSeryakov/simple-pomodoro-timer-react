@@ -12,13 +12,12 @@ export default function App() {
   const padTime = (time: number) :string  => time.toString().padStart(2, '0')
 
   const startTimer = (): void => {
-    setTitle(`You're doing great!` )
+    setTitle(`You're doing great!`)
     setIsRunning(true)
 
-    // @ts-ignore
-    intervalRef.current = setInterval(() => {
+    intervalRef.current = window.setInterval(() => {
       setTimeLeft(timeLeft => {
-        if (timeLeft >= 1) return timeLeft - 1
+        if (timeLeft) return --timeLeft
 
         resetTimer()
         return 0
@@ -33,7 +32,7 @@ export default function App() {
   }
 
   const resetTimer = (): void => {
-    setTitle(`Ready to go another round?` )
+    setTitle(`Ready to go another round?`)
     clearInterval(intervalRef.current)
     setTimeLeft(timeRange)
     setIsRunning(false)
@@ -48,14 +47,14 @@ export default function App() {
         <h2>{title}</h2>
 
         <div className="timer">
-          <span>{minutes}</span>
-          <span>:</span>
-          <span>{seconds}</span>
+          <span>{`${minutes}:${seconds}`}</span>
         </div>
 
         <div className="buttons">
-          {!isRunning && <button onClick={startTimer}>Start</button>}
-          {isRunning && <button onClick={stopTimer}>Pause</button>}
+          <button onClick={isRunning ? stopTimer : startTimer}>
+            {isRunning ? "Pause" : "Start"}
+          </button>
+
           <button onClick={resetTimer}>Reset</button>
         </div>
       </div>
